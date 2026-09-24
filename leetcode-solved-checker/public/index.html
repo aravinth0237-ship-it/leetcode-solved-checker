@@ -3,14 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+
 <title>LeetCode 14 Members</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
 
 body{
   margin:0;
-  font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   background:#0b0f14;
   color:#f4f7fb;
 }
@@ -18,176 +21,262 @@ body{
 .wrap{
   width:min(760px,100%);
   margin:auto;
-  padding:24px 12px;
+  padding:18px 10px;
 }
 
 h1{
   text-align:center;
-  font-size:28px;
-  margin:5px 0 4px;
+  font-size:26px;
+  margin:4px 0;
 }
 
 .sub{
   text-align:center;
   color:#8e9aaa;
-  font-size:13px;
-  margin:0 0 18px;
+  font-size:12px;
+  margin:0 0 16px;
 }
 
-.controls{
-  display:flex;
-  gap:8px;
-  margin-bottom:12px;
+/* INPUT AREA */
+
+.inputBox{
+  background:#111821;
+  border:1px solid #293646;
+  border-radius:12px;
+  padding:10px;
+  margin-bottom:10px;
 }
+
+textarea{
+  width:100%;
+  min-height:150px;
+  resize:vertical;
+
+  padding:11px;
+
+  border-radius:9px;
+  border:1px solid #303d4d;
+
+  background:#0c1219;
+  color:#fff;
+
+  outline:none;
+
+  font-size:12px;
+  line-height:1.6;
+
+  font-family:monospace;
+}
+
+textarea:focus{
+  border-color:#7285a0;
+}
+
+textarea::placeholder{
+  color:#657386;
+}
+
+/* BUTTON */
 
 button{
-  flex:1;
+  width:100%;
   height:42px;
+
+  margin-top:8px;
+
   border:0;
-  border-radius:10px;
-  background:white;
+  border-radius:9px;
+
+  background:#ffffff;
   color:#111;
-  font-weight:700;
+
+  font-weight:800;
+  font-size:13px;
+
   cursor:pointer;
 }
 
 button:disabled{
   opacity:.6;
+  cursor:not-allowed;
 }
+
+/* ERROR */
 
 .error{
   display:none;
+
   background:#2a171b;
   border:1px solid #5c292e;
+
   color:#ffb7bd;
-  padding:10px;
-  border-radius:10px;
+
+  padding:9px;
+
+  border-radius:9px;
+
   margin-bottom:10px;
-  font-size:13px;
+
+  font-size:12px;
 }
+
+/* BOARD */
 
 .board{
   background:#111821;
+
   border:1px solid #253140;
-  border-radius:14px;
+
+  border-radius:12px;
+
   overflow:hidden;
 }
 
 .header,
 .member{
   display:grid;
-  grid-template-columns:34px minmax(0,1fr) 150px 75px;
+
+  grid-template-columns:34px minmax(0,1fr) 130px 65px;
+
   align-items:center;
-  gap:8px;
+
+  gap:7px;
 }
 
 .header{
-  padding:9px 10px;
+  padding:8px 9px;
+
   background:#151e29;
+
   color:#8997aa;
-  font-size:11px;
+
+  font-size:10px;
+
   text-transform:uppercase;
-  letter-spacing:.5px;
+
+  letter-spacing:.4px;
 }
 
 .member{
-  min-height:47px;
-  padding:6px 10px;
+  min-height:44px;
+
+  padding:5px 9px;
+
   border-top:1px solid #202a36;
 }
 
 .num{
   color:#738198;
-  font-size:12px;
+
+  font-size:11px;
+
   text-align:center;
 }
 
-input{
-  width:100%;
-  height:34px;
-  padding:0 9px;
-  border-radius:7px;
-  border:1px solid #303d4d;
-  background:#0c1219;
-  color:white;
-  outline:none;
-  font-size:12px;
-}
-
-input:focus{
-  border-color:#7285a0;
-}
-
 .name{
-  font-size:13px;
+  font-size:12px;
+
   white-space:nowrap;
+
   overflow:hidden;
+
   text-overflow:ellipsis;
 }
 
 .count{
   text-align:right;
-  font-size:18px;
+
+  font-size:17px;
+
   font-weight:800;
 }
 
 .status{
   color:#738198;
-  font-size:10px;
-  margin-top:2px;
+
+  font-size:9px;
+
+  margin-top:1px;
+
+  white-space:nowrap;
+
+  overflow:hidden;
+
+  text-overflow:ellipsis;
 }
 
+/* LOADING */
+
+.loading{
+  color:#8e9aaa;
+}
+
+/* MOBILE */
+
 @media(max-width:600px){
+
   .wrap{
-    padding:12px 7px;
+    padding:10px 6px;
   }
 
   h1{
-    font-size:23px;
+    font-size:22px;
   }
 
   .sub{
-    font-size:11px;
-    margin-bottom:10px;
+    font-size:10px;
+    margin-bottom:9px;
+  }
+
+  .inputBox{
+    padding:7px;
+    margin-bottom:7px;
+  }
+
+  textarea{
+    min-height:120px;
+    padding:8px;
+
+    font-size:10px;
+    line-height:1.5;
+  }
+
+  button{
+    height:36px;
+    margin-top:6px;
+    font-size:12px;
   }
 
   .header,
   .member{
-    grid-template-columns:25px minmax(0,1fr) 120px 58px;
-    gap:5px;
+    grid-template-columns:25px minmax(0,1fr) 105px 52px;
+    gap:4px;
   }
 
   .header{
-    padding:7px 6px;
-    font-size:9px;
-  }
-
-  .member{
-    min-height:39px;
-    padding:4px 6px;
-  }
-
-  input{
-    height:29px;
-    padding:0 6px;
-    font-size:10px;
-  }
-
-  .name{
-    font-size:11px;
-  }
-
-  .count{
-    font-size:15px;
-  }
-
-  .status{
+    padding:6px;
     font-size:8px;
   }
 
-  button{
-    height:38px;
-    font-size:13px;
+  .member{
+    min-height:38px;
+    padding:4px 6px;
+  }
+
+  .num{
+    font-size:9px;
+  }
+
+  .name{
+    font-size:10px;
+  }
+
+  .count{
+    font-size:14px;
+  }
+
+  .status{
+    font-size:7px;
   }
 }
 </style>
@@ -197,61 +286,121 @@ input:focus{
 
 <main class="wrap">
 
-<h1>🏆 LeetCode Progress</h1>
-<p class="sub">14 Members • Total Problems Solved</p>
+  <h1>🏆 LeetCode Progress</h1>
 
-<div class="controls">
-  <button id="checkAll">Check All 14 Profiles</button>
-</div>
+  <p class="sub">
+    Paste all 14 LeetCode profile links — one link per line
+  </p>
 
-<div class="error" id="error"></div>
 
-<section class="board">
+  <!-- PROFILE LINKS -->
 
-  <div class="header">
-    <div>#</div>
-    <div>Profile Link</div>
-    <div>Member</div>
-    <div>Solved</div>
+  <div class="inputBox">
+
+    <textarea
+      id="profileLinks"
+      placeholder="Paste your 14 LeetCode profile links here...
+
+Example:
+https://leetcode.com/u/user1/
+https://leetcode.com/u/user2/
+https://leetcode.com/u/user3/
+...
+https://leetcode.com/u/user14/"
+    ></textarea>
+
+    <button id="checkAll">
+      Check 14 Profiles
+    </button>
+
   </div>
 
-  <div id="members"></div>
 
-</section>
+  <div class="error" id="error"></div>
+
+
+  <!-- RESULTS -->
+
+  <section class="board">
+
+    <div class="header">
+      <div>#</div>
+      <div>Member</div>
+      <div>Status</div>
+      <div>Solved</div>
+    </div>
+
+    <div id="members"></div>
+
+  </section>
 
 </main>
 
+
 <script>
 
-const members = document.getElementById("members");
-const errorBox = document.getElementById("error");
-const checkAllButton = document.getElementById("checkAll");
+const profileLinks =
+  document.getElementById("profileLinks");
 
-const savedLinks = Array(14).fill("");
+const checkAllButton =
+  document.getElementById("checkAll");
+
+const members =
+  document.getElementById("members");
+
+const errorBox =
+  document.getElementById("error");
+
+
+/* CREATE 14 ROWS */
 
 function createMembers(){
 
-  for(let i=0;i<14;i++){
+  members.innerHTML = "";
 
-    const row = document.createElement("div");
+  for(let i = 0; i < 14; i++){
+
+    const row =
+      document.createElement("div");
+
     row.className = "member";
 
     row.innerHTML = `
-      <div class="num">${String(i+1).padStart(2,"0")}</div>
 
-      <div>
-        <input
-          class="profileInput"
-          data-index="${i}"
-          placeholder="LeetCode profile link"
-          value="${savedLinks[i]}"
-        >
-        <div class="status" id="status-${i}">Waiting</div>
+      <div class="num">
+        ${String(i + 1).padStart(2,"0")}
       </div>
 
-      <div class="name" id="name-${i}">—</div>
+      <div>
+        <div
+          class="name"
+          id="name-${i}"
+        >
+          —
+        </div>
 
-      <div class="count" id="count-${i}">—</div>
+        <div
+          class="status"
+          id="status-${i}"
+        >
+          Waiting
+        </div>
+      </div>
+
+      <div
+        class="status"
+        id="profile-${i}"
+      >
+        —
+      </div>
+
+      <div
+        class="count"
+        id="count-${i}"
+      >
+        —
+      </div>
+
     `;
 
     members.appendChild(row);
@@ -261,13 +410,22 @@ function createMembers(){
 createMembers();
 
 
+/* GET USERNAME FROM LEETCODE LINK */
+
 function getUsername(value){
 
   value = value.trim();
 
-  if(!value) return "";
+  if(!value){
+    return "";
+  }
 
   try{
+
+    /*
+      Full URL:
+      https://leetcode.com/u/aravinth/
+    */
 
     if(value.includes("leetcode.com")){
 
@@ -277,117 +435,272 @@ function getUsername(value){
           : "https://" + value
       );
 
-      const parts = url.pathname
-        .split("/")
-        .filter(Boolean);
+      const parts =
+        url.pathname
+          .split("/")
+          .filter(Boolean);
 
-      const uIndex = parts.indexOf("u");
+      const uIndex =
+        parts.indexOf("u");
 
-      if(uIndex !== -1 && parts[uIndex + 1]){
-        return parts[uIndex + 1];
+      if(
+        uIndex !== -1 &&
+        parts[uIndex + 1]
+      ){
+
+        return decodeURIComponent(
+          parts[uIndex + 1]
+        );
+
       }
 
+      /*
+        Fallback
+      */
+
       return parts[0] || "";
+
     }
 
-  }catch(e){}
+  }catch(error){
+
+    return "";
+
+  }
+
+
+  /*
+    If user pastes only username
+  */
 
   return value
     .replace(/^@/,"")
     .replace(/\s/g,"");
+
 }
 
 
-async function checkProfile(index){
+/* CHECK ONE PROFILE */
 
-  const input = document.querySelector(
-    `.profileInput[data-index="${index}"]`
-  );
+async function checkProfile(
+  index,
+  link
+){
 
-  const name = document.getElementById(`name-${index}`);
-  const count = document.getElementById(`count-${index}`);
-  const status = document.getElementById(`status-${index}`);
+  const name =
+    document.getElementById(
+      `name-${index}`
+    );
 
-  const username = getUsername(input.value);
+  const count =
+    document.getElementById(
+      `count-${index}`
+    );
+
+  const status =
+    document.getElementById(
+      `status-${index}`
+    );
+
+  const profile =
+    document.getElementById(
+      `profile-${index}`
+    );
+
+
+  const username =
+    getUsername(link);
+
 
   if(!username){
 
-    name.textContent = "No profile";
-    count.textContent = "—";
-    status.textContent = "Enter link";
+    name.textContent =
+      "Invalid profile";
+
+    count.textContent =
+      "—";
+
+    status.textContent =
+      "Invalid link";
+
+    profile.textContent =
+      "—";
+
     return;
+
   }
 
-  status.textContent = "Checking...";
-  name.textContent = "Loading...";
-  count.textContent = "…";
+
+  name.textContent =
+    "Loading...";
+
+  count.textContent =
+    "…";
+
+  status.textContent =
+    "Checking";
+
+  profile.textContent =
+    `@${username}`;
+
 
   try{
 
-    const response = await fetch(
-      `/api/profile?username=${encodeURIComponent(username)}`
-    );
+    const response =
+      await fetch(
+        `/api/profile?username=${encodeURIComponent(username)}`
+      );
 
-    const data = await response.json();
+
+    const data =
+      await response.json();
+
 
     if(!response.ok){
-      throw new Error(data.error || "Unable to load profile");
+
+      throw new Error(
+        data.error ||
+        "Unable to load profile"
+      );
+
     }
 
+
+    /*
+      MEMBER NAME
+    */
+
     name.textContent =
-      data.realName || `@${data.username}`;
+      data.realName ||
+      `@${data.username}`;
+
+
+    /*
+      SOLVED COUNT
+    */
 
     count.textContent =
-      Number(data.solved.total).toLocaleString();
+      Number(
+        data.solved?.total ?? 0
+      ).toLocaleString();
+
+
+    /*
+      STATUS
+    */
 
     status.textContent =
+      "Updated";
+
+
+    profile.textContent =
       `@${data.username}`;
+
 
   }catch(error){
 
-    name.textContent = "Error";
-    count.textContent = "—";
-    status.textContent = "Try again";
+    name.textContent =
+      "Error";
+
+    count.textContent =
+      "—";
+
+    status.textContent =
+      "Try again";
+
+    profile.textContent =
+      `@${username}`;
+
   }
+
 }
 
 
-checkAllButton.addEventListener("click", async () => {
+/* CHECK ALL 14 */
 
-  errorBox.style.display = "none";
+checkAllButton.addEventListener(
+  "click",
+  async () => {
 
-  checkAllButton.disabled = true;
-  checkAllButton.textContent = "Checking...";
-
-  const inputs = document.querySelectorAll(".profileInput");
-
-  inputs.forEach((input,index)=>{
-    savedLinks[index] = input.value;
-  });
-
-  await Promise.all(
-    Array.from({length:14},(_,index)=>
-      checkProfile(index)
-    )
-  );
-
-  checkAllButton.disabled = false;
-  checkAllButton.textContent = "Check All 14 Profiles";
-
-});
+    errorBox.style.display =
+      "none";
 
 
-document.querySelectorAll(".profileInput").forEach(input => {
+    /*
+      GET LINKS
+    */
 
-  input.addEventListener("change", () => {
+    const links =
+      profileLinks.value
+        .split(/\r?\n/)
+        .map(link => link.trim())
+        .filter(Boolean);
 
-    const index = Number(input.dataset.index);
 
-    savedLinks[index] = input.value;
+    /*
+      REQUIRE 14 LINKS
+    */
 
-  });
+    if(links.length !== 14){
 
-});
+      errorBox.textContent =
+        `Please paste exactly 14 profile links. You pasted ${links.length}.`;
+
+      errorBox.style.display =
+        "block";
+
+      return;
+
+    }
+
+
+    /*
+      RESET RESULTS
+    */
+
+    createMembers();
+
+
+    /*
+      BUTTON STATE
+    */
+
+    checkAllButton.disabled =
+      true;
+
+    checkAllButton.textContent =
+      "Checking 14 Profiles...";
+
+
+    /*
+      CHECK PROFILES
+    */
+
+    await Promise.all(
+
+      links.map(
+        (link,index) =>
+          checkProfile(
+            index,
+            link
+          )
+      )
+
+    );
+
+
+    /*
+      DONE
+    */
+
+    checkAllButton.disabled =
+      false;
+
+    checkAllButton.textContent =
+      "Check 14 Profiles";
+
+  }
+);
 
 </script>
 
