@@ -3,13 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-
-<title>LeetCode 14 Members</title>
+<title>LeetCode Progress</title>
 
 <style>
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
   margin:0;
@@ -37,8 +34,6 @@ h1{
   margin:0 0 16px;
 }
 
-/* INPUT AREA */
-
 .inputBox{
   background:#111821;
   border:1px solid #293646;
@@ -51,20 +46,14 @@ textarea{
   width:100%;
   min-height:150px;
   resize:vertical;
-
   padding:11px;
-
   border-radius:9px;
   border:1px solid #303d4d;
-
   background:#0c1219;
   color:#fff;
-
   outline:none;
-
   font-size:12px;
   line-height:1.6;
-
   font-family:monospace;
 }
 
@@ -76,23 +65,16 @@ textarea::placeholder{
   color:#657386;
 }
 
-/* BUTTON */
-
 button{
   width:100%;
   height:42px;
-
   margin-top:8px;
-
   border:0;
   border-radius:9px;
-
-  background:#ffffff;
+  background:#fff;
   color:#111;
-
   font-weight:800;
   font-size:13px;
-
   cursor:pointer;
 }
 
@@ -101,117 +83,74 @@ button:disabled{
   cursor:not-allowed;
 }
 
-/* ERROR */
-
 .error{
   display:none;
-
   background:#2a171b;
   border:1px solid #5c292e;
-
   color:#ffb7bd;
-
   padding:9px;
-
   border-radius:9px;
-
   margin-bottom:10px;
-
   font-size:12px;
 }
 
-/* BOARD */
-
 .board{
   background:#111821;
-
   border:1px solid #253140;
-
   border-radius:12px;
-
   overflow:hidden;
 }
 
 .header,
 .member{
   display:grid;
-
   grid-template-columns:34px minmax(0,1fr) 130px 65px;
-
   align-items:center;
-
   gap:7px;
 }
 
 .header{
   padding:8px 9px;
-
   background:#151e29;
-
   color:#8997aa;
-
   font-size:10px;
-
   text-transform:uppercase;
-
   letter-spacing:.4px;
 }
 
 .member{
   min-height:44px;
-
   padding:5px 9px;
-
   border-top:1px solid #202a36;
 }
 
 .num{
   color:#738198;
-
   font-size:11px;
-
   text-align:center;
 }
 
 .name{
   font-size:12px;
-
   white-space:nowrap;
-
   overflow:hidden;
-
   text-overflow:ellipsis;
 }
 
 .count{
   text-align:right;
-
   font-size:17px;
-
   font-weight:800;
 }
 
 .status{
   color:#738198;
-
   font-size:9px;
-
   margin-top:1px;
-
   white-space:nowrap;
-
   overflow:hidden;
-
   text-overflow:ellipsis;
 }
-
-/* LOADING */
-
-.loading{
-  color:#8e9aaa;
-}
-
-/* MOBILE */
 
 @media(max-width:600px){
 
@@ -230,20 +169,16 @@ button:disabled{
 
   .inputBox{
     padding:7px;
-    margin-bottom:7px;
   }
 
   textarea{
     min-height:120px;
     padding:8px;
-
     font-size:10px;
-    line-height:1.5;
   }
 
   button{
     height:36px;
-    margin-top:6px;
     font-size:12px;
   }
 
@@ -286,56 +221,47 @@ button:disabled{
 
 <main class="wrap">
 
-  <h1>🏆 LeetCode Progress</h1>
+<h1>🏆 LeetCode Progress</h1>
 
-  <p class="sub">
-    Paste all 14 LeetCode profile links — one link per line
-  </p>
+<p class="sub">
+Paste all LeetCode profile links — one link per line
+</p>
 
+<div class="inputBox">
 
-  <!-- PROFILE LINKS -->
-
-  <div class="inputBox">
-
-    <textarea
-      id="profileLinks"
-      placeholder="Paste your 14 LeetCode profile links here...
+<textarea
+  id="profileLinks"
+  placeholder="Paste LeetCode profile links here...
 
 Example:
 https://leetcode.com/u/user1/
 https://leetcode.com/u/user2/
 https://leetcode.com/u/user3/
-...
-https://leetcode.com/u/user14/"
-    ></textarea>
+https://leetcode.com/u/user4/"
+></textarea>
 
-    <button id="checkAll">
-      Check 14 Profiles
-    </button>
+<button id="checkAll">
+Check Profiles
+</button>
 
-  </div>
+</div>
 
+<div class="error" id="error"></div>
 
-  <div class="error" id="error"></div>
+<section class="board">
 
+<div class="header">
+  <div>#</div>
+  <div>Member</div>
+  <div>Status</div>
+  <div>Solved</div>
+</div>
 
-  <!-- RESULTS -->
+<div id="members"></div>
 
-  <section class="board">
-
-    <div class="header">
-      <div>#</div>
-      <div>Member</div>
-      <div>Status</div>
-      <div>Solved</div>
-    </div>
-
-    <div id="members"></div>
-
-  </section>
+</section>
 
 </main>
-
 
 <script>
 
@@ -352,13 +278,13 @@ const errorBox =
   document.getElementById("error");
 
 
-/* CREATE 14 ROWS */
+/* CREATE ROWS */
 
-function createMembers(){
+function createRows(total){
 
   members.innerHTML = "";
 
-  for(let i = 0; i < 14; i++){
+  for(let i = 0; i < total; i++){
 
     const row =
       document.createElement("div");
@@ -376,7 +302,7 @@ function createMembers(){
           class="name"
           id="name-${i}"
         >
-          —
+          Loading...
         </div>
 
         <div
@@ -407,25 +333,16 @@ function createMembers(){
   }
 }
 
-createMembers();
 
-
-/* GET USERNAME FROM LEETCODE LINK */
+/* GET USERNAME */
 
 function getUsername(value){
 
   value = value.trim();
 
-  if(!value){
-    return "";
-  }
+  if(!value) return "";
 
   try{
-
-    /*
-      Full URL:
-      https://leetcode.com/u/aravinth/
-    */
 
     if(value.includes("leetcode.com")){
 
@@ -437,8 +354,8 @@ function getUsername(value){
 
       const parts =
         url.pathname
-          .split("/")
-          .filter(Boolean);
+        .split("/")
+        .filter(Boolean);
 
       const uIndex =
         parts.indexOf("u");
@@ -447,102 +364,56 @@ function getUsername(value){
         uIndex !== -1 &&
         parts[uIndex + 1]
       ){
-
         return decodeURIComponent(
           parts[uIndex + 1]
         );
-
       }
 
-      /*
-        Fallback
-      */
-
       return parts[0] || "";
-
     }
 
   }catch(error){
-
     return "";
-
   }
-
-
-  /*
-    If user pastes only username
-  */
 
   return value
     .replace(/^@/,"")
     .replace(/\s/g,"");
-
 }
 
 
 /* CHECK ONE PROFILE */
 
-async function checkProfile(
-  index,
-  link
-){
+async function checkProfile(index, link){
 
   const name =
-    document.getElementById(
-      `name-${index}`
-    );
+    document.getElementById(`name-${index}`);
 
   const count =
-    document.getElementById(
-      `count-${index}`
-    );
+    document.getElementById(`count-${index}`);
 
   const status =
-    document.getElementById(
-      `status-${index}`
-    );
+    document.getElementById(`status-${index}`);
 
   const profile =
-    document.getElementById(
-      `profile-${index}`
-    );
-
+    document.getElementById(`profile-${index}`);
 
   const username =
     getUsername(link);
 
-
   if(!username){
 
-    name.textContent =
-      "Invalid profile";
-
-    count.textContent =
-      "—";
-
-    status.textContent =
-      "Invalid link";
-
-    profile.textContent =
-      "—";
+    name.textContent = "Invalid profile";
+    count.textContent = "—";
+    status.textContent = "Invalid link";
 
     return;
-
   }
 
-
-  name.textContent =
-    "Loading...";
-
-  count.textContent =
-    "…";
-
-  status.textContent =
-    "Checking";
-
-  profile.textContent =
-    `@${username}`;
-
+  name.textContent = "Loading...";
+  count.textContent = "…";
+  status.textContent = "Checking";
+  profile.textContent = `@${username}`;
 
   try{
 
@@ -551,153 +422,87 @@ async function checkProfile(
         `/api/profile?username=${encodeURIComponent(username)}`
       );
 
-
     const data =
       await response.json();
-
 
     if(!response.ok){
 
       throw new Error(
-        data.error ||
-        "Unable to load profile"
+        data.error || "Unable to load profile"
       );
-
     }
-
-
-    /*
-      MEMBER NAME
-    */
 
     name.textContent =
       data.realName ||
       `@${data.username}`;
-
-
-    /*
-      SOLVED COUNT
-    */
 
     count.textContent =
       Number(
         data.solved?.total ?? 0
       ).toLocaleString();
 
-
-    /*
-      STATUS
-    */
-
     status.textContent =
       "Updated";
-
 
     profile.textContent =
       `@${data.username}`;
 
-
   }catch(error){
 
-    name.textContent =
-      "Error";
-
-    count.textContent =
-      "—";
-
-    status.textContent =
-      "Try again";
-
-    profile.textContent =
-      `@${username}`;
+    name.textContent = "Error";
+    count.textContent = "—";
+    status.textContent = "Try again";
 
   }
-
 }
 
 
-/* CHECK ALL 14 */
+/* CHECK ALL LINKS */
 
 checkAllButton.addEventListener(
   "click",
   async () => {
 
-    errorBox.style.display =
-      "none";
-
-
-    /*
-      GET LINKS
-    */
+    errorBox.style.display = "none";
 
     const links =
       profileLinks.value
-        .split(/\r?\n/)
-        .map(link => link.trim())
-        .filter(Boolean);
+      .split(/\r?\n/)
+      .map(link => link.trim())
+      .filter(Boolean);
 
-
-    /*
-      REQUIRE 14 LINKS
-    */
-
-    if(links.length !== 14){
+    if(links.length === 0){
 
       errorBox.textContent =
-        `Please paste exactly 14 profile links. You pasted ${links.length}.`;
+        "Please paste at least one LeetCode profile link.";
 
-      errorBox.style.display =
-        "block";
+      errorBox.style.display = "block";
 
       return;
-
     }
 
+    createRows(links.length);
 
-    /*
-      RESET RESULTS
-    */
-
-    createMembers();
-
-
-    /*
-      BUTTON STATE
-    */
-
-    checkAllButton.disabled =
-      true;
+    checkAllButton.disabled = true;
 
     checkAllButton.textContent =
-      "Checking 14 Profiles...";
-
+      `Checking ${links.length} Profiles...`;
 
     /*
-      CHECK PROFILES
+      Check every profile
     */
 
     await Promise.all(
-
       links.map(
         (link,index) =>
-          checkProfile(
-            index,
-            link
-          )
+          checkProfile(index,link)
       )
-
     );
 
-
-    /*
-      DONE
-    */
-
-    checkAllButton.disabled =
-      false;
+    checkAllButton.disabled = false;
 
     checkAllButton.textContent =
-      "Check 14 Profiles";
+      "Check Profiles";
 
   }
 );
