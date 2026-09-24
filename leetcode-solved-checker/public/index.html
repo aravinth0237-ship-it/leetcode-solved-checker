@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>LeetCode Solved Checker</title>
+  <style>
+    *{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:#0b0f14;color:#f4f7fb;min-height:100vh}
+    .wrap{max-width:900px;margin:auto;padding:70px 20px}.hero{text-align:center}.badge{display:inline-block;padding:7px 12px;border:1px solid #263241;border-radius:999px;color:#aebbd0;font-size:13px}
+    h1{font-size:clamp(36px,7vw,64px);line-height:1.02;margin:22px 0 12px}.sub{color:#aeb8c7;font-size:17px}
+    .search{display:flex;gap:10px;max-width:720px;margin:32px auto 20px}.search input{flex:1;padding:17px 18px;border-radius:14px;border:1px solid #2a3544;background:#121923;color:white;font-size:16px;outline:none}.search input:focus{border-color:#6c7d95}
+    button{padding:0 24px;border:0;border-radius:14px;background:#fff;color:#111;font-weight:700;font-size:16px;cursor:pointer}.hint{text-align:center;color:#718097;font-size:13px}
+    .error{max-width:720px;margin:18px auto;padding:14px 16px;background:#25171a;border:1px solid #5c292e;border-radius:12px;color:#ffb7bd;display:none}
+    .card{display:none;margin:36px auto 0;background:#111821;border:1px solid #253140;border-radius:24px;padding:28px;max-width:720px}
+    .profile{display:flex;align-items:center;gap:16px}.avatar{width:64px;height:64px;border-radius:50%;background:#202b38;object-fit:cover}.name{font-size:23px;font-weight:750}.meta{color:#8492a6;margin-top:4px;font-size:14px}
+    .total{text-align:center;margin:34px 0}.total .num{font-size:72px;font-weight:800;letter-spacing:-3px}.total .label{color:#9da9ba;font-size:15px;text-transform:uppercase;letter-spacing:1.5px}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.stat{background:#151e29;border-radius:16px;padding:18px;text-align:center}.stat b{display:block;font-size:27px}.stat span{color:#8997aa;font-size:13px}
+    .foot{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-top:22px;color:#77869a;font-size:12px}.foot a{color:#dce5f1;text-decoration:none}
+    @media(max-width:600px){.search{flex-direction:column}.search button{height:52px}.stats{grid-template-columns:1fr}.total .num{font-size:58px}.card{padding:20px}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <span class="badge">LEETCODE PROFILE CHECKER</span>
+      <h1>How many problems<br>have you solved?</h1>
+      <p class="sub">Paste a LeetCode profile link or username. Get the solved count directly from LeetCode's public profile data.</p>
+      <form class="search" id="form">
+        <input id="username" autocomplete="off" placeholder="https://leetcode.com/u/username/" required>
+        <button>Check Profile</button>
+      </form>
+      <div class="hint">Example: leetcode.com/u/Graphql/</div>
+      <div class="error" id="error"></div>
+    </section>
+
+    <section class="card" id="card">
+      <div class="profile">
+        <img id="avatar" class="avatar" alt="">
+        <div><div class="name" id="name"></div><div class="meta" id="meta"></div></div>
+      </div>
+      <div class="total"><div class="num" id="total">0</div><div class="label">Problems Solved</div></div>
+      <div class="stats">
+        <div class="stat"><b id="easy">0</b><span>Easy</span></div>
+        <div class="stat"><b id="medium">0</b><span>Medium</span></div>
+        <div class="stat"><b id="hard">0</b><span>Hard</span></div>
+      </div>
+      <div class="foot">
+        <span id="checked"></span>
+        <a id="profileLink" target="_blank" rel="noopener">Open LeetCode Profile ↗</a>
+      </div>
+    </section>
+  </main>
+
+<script>
+const form = document.getElementById("form");
+const input = document.getElementById("username");
+const error = document.getElementById("error");
+const card = document.getElementById("card");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  error.style.display = "none";
+  card.style.display = "none";
+
+  const button = form.querySelector("button");
+  button.disabled = true;
+  button.textContent = "Checking…";
+
+  try {
+    const r = await fetch(`/api/profile?username=${encodeURIComponent(input.value)}`);
+    const data = await r.json();
+    if (!r.ok) throw new Error(data.error || "Unable to load profile.");
+
+    document.getElementById("avatar").src = data.avatar || "";
+    document.getElementById("name").textContent = data.realName ? `${data.realName} (@${data.username})` : `@${data.username}`;
+    document.getElementById("meta").textContent =
+      [data.country, data.ranking ? `Rank #${Number(data.ranking).toLocaleString()}` : ""].filter(Boolean).join(" • ");
+    document.getElementById("total").textContent = data.solved.total.toLocaleString();
+    document.getElementById("easy").textContent = data.solved.easy.toLocaleString();
+    document.getElementById("medium").textContent = data.solved.medium.toLocaleString();
+    document.getElementById("hard").textContent = data.solved.hard.toLocaleString();
+    document.getElementById("profileLink").href = data.profileUrl;
+    document.getElementById("checked").textContent = `Checked ${new Date(data.checkedAt).toLocaleString()}`;
+    card.style.display = "block";
+  } catch (err) {
+    error.textContent = err.message;
+    error.style.display = "block";
+  } finally {
+    button.disabled = false;
+    button.textContent = "Check Profile";
+  }
+});
+</script>
+</body>
+</html>
