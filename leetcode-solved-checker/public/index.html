@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
 
 <meta charset="utf-8">
@@ -19,8 +20,14 @@
 
 body{
   margin:0;
-  font-family:Inter,system-ui,-apple-system,
-    BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
   background:#0b0f14;
   color:#f4f7fb;
 }
@@ -45,6 +52,11 @@ h1{
   margin:0 0 16px;
 }
 
+
+/* =========================
+   INPUT
+========================= */
+
 .inputBox{
   background:#111821;
   border:1px solid #293646;
@@ -57,14 +69,20 @@ textarea{
   width:100%;
   min-height:150px;
   resize:vertical;
+
   padding:11px;
+
   border-radius:9px;
   border:1px solid #303d4d;
+
   background:#0c1219;
   color:#fff;
+
   outline:none;
+
   font-size:12px;
   line-height:1.6;
+
   font-family:monospace;
 }
 
@@ -79,13 +97,18 @@ textarea::placeholder{
 button{
   width:100%;
   height:42px;
+
   margin-top:8px;
+
   border:0;
   border-radius:9px;
+
   background:#fff;
   color:#111;
+
   font-weight:800;
   font-size:13px;
+
   cursor:pointer;
 }
 
@@ -96,73 +119,214 @@ button:disabled{
 
 .error{
   display:none;
+
   background:#2a171b;
   border:1px solid #5c292e;
+
   color:#ffb7bd;
+
   padding:9px;
+
   border-radius:9px;
+
   margin-bottom:10px;
+
   font-size:12px;
 }
 
+
+/* =========================
+   ONE SINGLE TABLE BOX
+========================= */
+
 .board{
+  width:100%;
+
   background:#111821;
-  border:1px solid #253140;
-  border-radius:16px;
+
+  border:1px solid #344154;
+
+  border-radius:18px;
+
   overflow:hidden;
 }
+
+
+/* =========================
+   SAME COLUMNS
+========================= */
 
 .header,
 .member{
   display:grid;
+
   grid-template-columns:
-    45px
+    55px
     minmax(0,1fr)
-    105px
-    90px;
+    120px
+    100px;
+
   align-items:center;
-  gap:10px;
+
+  column-gap:0;
 }
+
+
+/* =========================
+   HEADER
+========================= */
 
 .header{
-  padding:12px 14px;
-  background:#151e29;
-  color:#aebbd0;
-  font-size:11px;
-  font-weight:700;
-  text-transform:uppercase;
-  letter-spacing:.5px;
-}
-
-.member{
   min-height:56px;
-  padding:8px 14px;
-  border-top:1px solid #202a36;
+
+  padding:0 18px;
+
+  background:#151e29;
+
+  border-bottom:1px solid #293646;
+
+  color:#aebbd0;
+
+  font-size:13px;
+
+  font-weight:700;
+
+  text-transform:uppercase;
+
+  letter-spacing:.3px;
 }
 
-.num{
-  color:#8190a5;
-  font-size:13px;
-  font-weight:600;
+
+/*
+  IMPORTANT:
+  Header cells are NOT separate boxes.
+*/
+
+.header > div{
+  height:auto;
+
+  border:0;
+
+  background:transparent;
+
+  padding:0;
+}
+
+
+/* # */
+
+.header > div:nth-child(1){
   text-align:center;
 }
 
-.name{
+
+/* NAME */
+
+.header > div:nth-child(2){
+  text-align:left;
+}
+
+
+/* PAST 24H */
+
+.header > div:nth-child(3){
+  text-align:right;
+}
+
+
+/* SOLVED */
+
+.header > div:nth-child(4){
+  text-align:right;
+}
+
+
+/* =========================
+   MEMBER ROW
+========================= */
+
+.member{
+  min-height:62px;
+
+  padding:0 18px;
+
+  border-bottom:1px solid #253140;
+}
+
+.member:last-child{
+  border-bottom:none;
+}
+
+
+/* =========================
+   NUMBER
+========================= */
+
+.num{
+  text-align:center;
+
   font-size:14px;
+
   font-weight:600;
+
+  color:#8190a5;
+}
+
+
+/* =========================
+   NAME
+========================= */
+
+.name{
+  text-align:left;
+
+  font-size:16px;
+
+  font-weight:600;
+
   color:#f4f7fb;
+
   white-space:nowrap;
+
   overflow:hidden;
+
   text-overflow:ellipsis;
 }
 
-.past,
-.count{
+
+/* =========================
+   PAST 24H
+========================= */
+
+.past{
   text-align:right;
-  font-size:17px;
+
+  font-size:18px;
+
   font-weight:700;
+
   color:#f4f7fb;
 }
+
+
+/* =========================
+   SOLVED
+========================= */
+
+.count{
+  text-align:right;
+
+  font-size:18px;
+
+  font-weight:700;
+
+  color:#f4f7fb;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:600px){
 
@@ -194,33 +358,47 @@ button:disabled{
     font-size:12px;
   }
 
+
+  /* SAME MOBILE COLUMNS */
+
   .header,
   .member{
+
     grid-template-columns:
-      28px
+      35px
       minmax(0,1fr)
-      70px
-      58px;
-    gap:5px;
+      75px
+      65px;
+
+    column-gap:0;
   }
 
+
   .header{
-    padding:8px 7px;
-    font-size:8px;
+    min-height:48px;
+
+    padding:0 8px;
+
+    font-size:9px;
   }
+
 
   .member{
     min-height:52px;
-    padding:7px;
+
+    padding:0 8px;
   }
+
 
   .num{
     font-size:10px;
   }
 
+
   .name{
-    font-size:12px;
+    font-size:13px;
   }
+
 
   .past,
   .count{
@@ -233,15 +411,21 @@ button:disabled{
 
 </head>
 
+
 <body>
 
 <main class="wrap">
 
-  <h1>🏆 LeetCode Progress</h1>
+
+  <h1>
+    🏆 LeetCode Progress
+  </h1>
+
 
   <p class="sub">
     Paste all LeetCode profile links — one link per line
   </p>
+
 
   <div class="inputBox">
 
@@ -256,18 +440,26 @@ https://leetcode.com/u/user3/
 https://leetcode.com/u/user4/"
     ></textarea>
 
+
     <button id="checkAll">
       Check Profiles
     </button>
 
   </div>
 
+
   <div
     class="error"
     id="error"
   ></div>
 
+
+  <!-- SINGLE BOX -->
+
   <section class="board">
+
+
+    <!-- HEADER -->
 
     <div class="header">
 
@@ -281,26 +473,43 @@ https://leetcode.com/u/user4/"
 
     </div>
 
+
+    <!-- MEMBERS -->
+
     <div id="members"></div>
 
+
   </section>
+
 
 </main>
 
 
 <script>
 
+
 const profileLinks =
-  document.getElementById("profileLinks");
+  document.getElementById(
+    "profileLinks"
+  );
+
 
 const checkAllButton =
-  document.getElementById("checkAll");
+  document.getElementById(
+    "checkAll"
+  );
+
 
 const members =
-  document.getElementById("members");
+  document.getElementById(
+    "members"
+  );
+
 
 const errorBox =
-  document.getElementById("error");
+  document.getElementById(
+    "error"
+  );
 
 
 /* =========================
@@ -309,29 +518,39 @@ const errorBox =
 
 function getUsername(value){
 
-  value = value.trim();
+  value =
+    value.trim();
 
   if(!value){
     return "";
   }
 
+
   try{
 
-    if(value.includes("leetcode.com")){
+    if(
+      value.includes(
+        "leetcode.com"
+      )
+    ){
 
-      const url = new URL(
-        value.startsWith("http")
-          ? value
-          : "https://" + value
-      );
+      const url =
+        new URL(
+          value.startsWith("http")
+            ? value
+            : "https://" + value
+        );
+
 
       const parts =
         url.pathname
           .split("/")
           .filter(Boolean);
 
+
       const uIndex =
         parts.indexOf("u");
+
 
       if(
         uIndex !== -1 &&
@@ -344,6 +563,7 @@ function getUsername(value){
 
       }
 
+
       return parts[0] || "";
 
     }
@@ -353,6 +573,7 @@ function getUsername(value){
     return "";
 
   }
+
 
   return value
     .replace(/^@/,"")
@@ -370,15 +591,21 @@ async function checkProfile(link){
   const username =
     getUsername(link);
 
+
   if(!username){
 
     return {
+
       name:"Invalid profile",
+
       past24Hours:0,
+
       solved:0
+
     };
 
   }
+
 
   try{
 
@@ -387,8 +614,10 @@ async function checkProfile(link){
         `/api/profile?username=${encodeURIComponent(username)}`
       );
 
+
     const data =
       await response.json();
+
 
     if(!response.ok){
 
@@ -398,6 +627,7 @@ async function checkProfile(link){
       );
 
     }
+
 
     return {
 
@@ -417,6 +647,7 @@ async function checkProfile(link){
 
     };
 
+
   }catch(error){
 
     return {
@@ -435,21 +666,45 @@ async function checkProfile(link){
 
 
 /* =========================
-   SORT + CREATE ROWS
+   SORT NAME
+   IGNORE SPECIAL CHARACTERS
+========================= */
+
+function sortName(name){
+
+  return String(name)
+
+    .toLowerCase()
+
+    .replace(
+      /[^a-z0-9]/g,
+      ""
+    );
+
+}
+
+
+/* =========================
+   CREATE ROWS
 ========================= */
 
 function createRows(data){
 
   members.innerHTML = "";
 
+
   data.forEach(
     (user,index) => {
 
       const row =
-        document.createElement("div");
+        document.createElement(
+          "div"
+        );
+
 
       row.className =
         "member";
+
 
       row.innerHTML = `
 
@@ -459,15 +714,20 @@ function createRows(data){
           ).padStart(2,"0")}
         </div>
 
+
         <div class="name">
-          ${escapeHtml(user.name)}
+          ${escapeHtml(
+            user.name
+          )}
         </div>
+
 
         <div class="past">
           ${Number(
             user.past24Hours
           ).toLocaleString()}
         </div>
+
 
         <div class="count">
           ${Number(
@@ -477,7 +737,10 @@ function createRows(data){
 
       `;
 
-      members.appendChild(row);
+
+      members.appendChild(
+        row
+      );
 
     }
   );
@@ -492,33 +755,60 @@ function createRows(data){
 function escapeHtml(value){
 
   return String(value)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
+    );
 
 }
 
 
 /* =========================
-   CHECK ALL PROFILES
+   CHECK ALL
 ========================= */
 
 checkAllButton.addEventListener(
   "click",
   async () => {
 
+
     errorBox.style.display =
       "none";
 
+
     const links =
       profileLinks.value
+
         .split(/\r?\n/)
+
         .map(
-          link => link.trim()
+          link =>
+            link.trim()
         )
+
         .filter(Boolean);
+
 
     if(
       links.length === 0
@@ -534,46 +824,55 @@ checkAllButton.addEventListener(
 
     }
 
+
     checkAllButton.disabled =
       true;
+
 
     checkAllButton.textContent =
       `Checking ${links.length} Profiles...`;
 
+
     try{
 
-      /*
-        Check every profile
-        at the same time.
-      */
 
       const results =
         await Promise.all(
+
           links.map(
             link =>
-              checkProfile(link)
+              checkProfile(
+                link
+              )
           )
+
         );
 
 
       /*
-        Alphabetical order:
-        A → B → C → D...
+        Alphabetical order.
+        Special characters are ignored.
       */
 
       results.sort(
-        (a,b) =>
-          a.name.localeCompare(
-            b.name,
-            undefined,
-            {
-              sensitivity:"base"
-            }
-          )
+        (a,b) => {
+
+          return sortName(
+            a.name
+          ).localeCompare(
+            sortName(
+              b.name
+            )
+          );
+
+        }
       );
 
 
-      createRows(results);
+      createRows(
+        results
+      );
+
 
     }catch(error){
 
@@ -589,8 +888,10 @@ checkAllButton.addEventListener(
     checkAllButton.disabled =
       false;
 
+
     checkAllButton.textContent =
       "Check Profiles";
+
 
   }
 );
@@ -598,4 +899,5 @@ checkAllButton.addEventListener(
 </script>
 
 </body>
+
 </html>
