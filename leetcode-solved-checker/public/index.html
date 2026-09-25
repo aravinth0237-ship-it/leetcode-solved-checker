@@ -14,13 +14,13 @@
 <style>
 
 *{
-  box-sizing:border-box
+  box-sizing:border-box;
 }
 
 body{
   margin:0;
   font-family:Inter,system-ui,-apple-system,
-  BlinkMacSystemFont,"Segoe UI",sans-serif;
+    BlinkMacSystemFont,"Segoe UI",sans-serif;
   background:#0b0f14;
   color:#f4f7fb;
 }
@@ -35,6 +35,7 @@ h1{
   text-align:center;
   font-size:26px;
   margin:4px 0;
+  font-weight:800;
 }
 
 .sub{
@@ -107,102 +108,60 @@ button:disabled{
 .board{
   background:#111821;
   border:1px solid #253140;
-  border-radius:12px;
+  border-radius:16px;
   overflow:hidden;
 }
 
 .header,
 .member{
-
   display:grid;
-
   grid-template-columns:
-  34px
-  minmax(0,1fr)
-  130px
-  75px
-  75px;
-
+    45px
+    minmax(0,1fr)
+    105px
+    90px;
   align-items:center;
-
-  gap:7px;
+  gap:10px;
 }
 
 .header{
-
-  padding:8px 9px;
-
+  padding:12px 14px;
   background:#151e29;
-
-  color:#8997aa;
-
-  font-size:10px;
-
+  color:#aebbd0;
+  font-size:11px;
+  font-weight:700;
   text-transform:uppercase;
-
-  letter-spacing:.4px;
+  letter-spacing:.5px;
 }
 
 .member{
-
-  min-height:44px;
-
-  padding:5px 9px;
-
-  border-top:
-  1px solid #202a36;
+  min-height:56px;
+  padding:8px 14px;
+  border-top:1px solid #202a36;
 }
 
 .num{
-  color:#738198;
-  font-size:11px;
+  color:#8190a5;
+  font-size:13px;
+  font-weight:600;
   text-align:center;
 }
 
 .name{
-
-  font-size:12px;
-
+  font-size:14px;
+  font-weight:600;
+  color:#f4f7fb;
   white-space:nowrap;
-
   overflow:hidden;
-
   text-overflow:ellipsis;
 }
 
+.past,
 .count{
-
   text-align:right;
-
   font-size:17px;
-
-  font-weight:800;
-}
-
-.past{
-
-  text-align:right;
-
-  font-size:17px;
-
-  font-weight:800;
-
-  color:#dfe7f2;
-}
-
-.status{
-
-  color:#738198;
-
-  font-size:9px;
-
-  margin-top:1px;
-
-  white-space:nowrap;
-
-  overflow:hidden;
-
-  text-overflow:ellipsis;
+  font-weight:700;
+  color:#f4f7fb;
 }
 
 @media(max-width:600px){
@@ -237,42 +196,35 @@ button:disabled{
 
   .header,
   .member{
-
     grid-template-columns:
-    25px
-    minmax(0,1fr)
-    75px
-    55px
-    55px;
-
-    gap:4px;
+      28px
+      minmax(0,1fr)
+      70px
+      58px;
+    gap:5px;
   }
 
   .header{
-    padding:6px;
-    font-size:7px;
+    padding:8px 7px;
+    font-size:8px;
   }
 
   .member{
-    min-height:38px;
-    padding:4px 6px;
+    min-height:52px;
+    padding:7px;
   }
 
   .num{
-    font-size:9px;
-  }
-
-  .name{
     font-size:10px;
   }
 
-  .count,
-  .past{
-    font-size:13px;
+  .name{
+    font-size:12px;
   }
 
-  .status{
-    font-size:7px;
+  .past,
+  .count{
+    font-size:14px;
   }
 
 }
@@ -285,55 +237,53 @@ button:disabled{
 
 <main class="wrap">
 
-<h1>🏆 LeetCode Progress</h1>
+  <h1>🏆 LeetCode Progress</h1>
 
-<p class="sub">
-Paste all LeetCode profile links — one link per line
-</p>
+  <p class="sub">
+    Paste all LeetCode profile links — one link per line
+  </p>
 
-<div class="inputBox">
+  <div class="inputBox">
 
-<textarea
-  id="profileLinks"
-  placeholder="Paste LeetCode profile links here...
+    <textarea
+      id="profileLinks"
+      placeholder="Paste LeetCode profile links here...
 
 Example:
 https://leetcode.com/u/user1/
 https://leetcode.com/u/user2/
 https://leetcode.com/u/user3/
 https://leetcode.com/u/user4/"
-></textarea>
+    ></textarea>
 
-<button id="checkAll">
-Check Profiles
-</button>
+    <button id="checkAll">
+      Check Profiles
+    </button>
 
-</div>
+  </div>
 
-<div
-  class="error"
-  id="error"
-></div>
+  <div
+    class="error"
+    id="error"
+  ></div>
 
-<section class="board">
+  <section class="board">
 
-<div class="header">
+    <div class="header">
 
-  <div>#</div>
+      <div>#</div>
 
-  <div>Member</div>
+      <div>NAME</div>
 
-  <div>Status</div>
+      <div>PAST 24H</div>
 
-  <div>Solved</div>
+      <div>SOLVED</div>
 
-  <div>Past 24h</div>
+    </div>
 
-</div>
+    <div id="members"></div>
 
-<div id="members"></div>
-
-</section>
+  </section>
 
 </main>
 
@@ -341,131 +291,44 @@ Check Profiles
 <script>
 
 const profileLinks =
-  document.getElementById(
-    "profileLinks"
-  );
+  document.getElementById("profileLinks");
 
 const checkAllButton =
-  document.getElementById(
-    "checkAll"
-  );
+  document.getElementById("checkAll");
 
 const members =
-  document.getElementById(
-    "members"
-  );
+  document.getElementById("members");
 
 const errorBox =
-  document.getElementById(
-    "error"
-  );
+  document.getElementById("error");
 
 
-/* CREATE ROWS */
-
-function createRows(total){
-
-  members.innerHTML = "";
-
-  for(
-    let i = 0;
-    i < total;
-    i++
-  ){
-
-    const row =
-      document.createElement(
-        "div"
-      );
-
-    row.className =
-      "member";
-
-    row.innerHTML = `
-
-      <div class="num">
-        ${String(
-          i + 1
-        ).padStart(2,"0")}
-      </div>
-
-      <div>
-
-        <div
-          class="name"
-          id="name-${i}"
-        >
-          Loading...
-        </div>
-
-        <div
-          class="status"
-          id="status-${i}"
-        >
-          Waiting
-        </div>
-
-      </div>
-
-      <div
-        class="status"
-        id="profile-${i}"
-      >
-        —
-      </div>
-
-      <div
-        class="count"
-        id="count-${i}"
-      >
-        —
-      </div>
-
-      <div
-        class="past"
-        id="past-${i}"
-      >
-        —
-      </div>
-
-    `;
-
-    members.appendChild(row);
-
-  }
-
-}
-
-
-/* GET USERNAME */
+/* =========================
+   GET USERNAME
+========================= */
 
 function getUsername(value){
 
-  value =
-    value.trim();
+  value = value.trim();
 
-  if(!value)
+  if(!value){
     return "";
+  }
 
   try{
 
-    if(
-      value.includes(
-        "leetcode.com"
-      )
-    ){
+    if(value.includes("leetcode.com")){
 
-      const url =
-        new URL(
-          value.startsWith("http")
-            ? value
-            : "https://" + value
-        );
+      const url = new URL(
+        value.startsWith("http")
+          ? value
+          : "https://" + value
+      );
 
       const parts =
         url.pathname
-        .split("/")
-        .filter(Boolean);
+          .split("/")
+          .filter(Boolean);
 
       const uIndex =
         parts.indexOf("u");
@@ -498,84 +361,30 @@ function getUsername(value){
 }
 
 
-/* CHECK ONE PROFILE */
+/* =========================
+   CHECK ONE PROFILE
+========================= */
 
-async function checkProfile(
-  index,
-  link
-){
-
-  const name =
-    document.getElementById(
-      `name-${index}`
-    );
-
-  const count =
-    document.getElementById(
-      `count-${index}`
-    );
-
-  const past =
-    document.getElementById(
-      `past-${index}`
-    );
-
-  const status =
-    document.getElementById(
-      `status-${index}`
-    );
-
-  const profile =
-    document.getElementById(
-      `profile-${index}`
-    );
+async function checkProfile(link){
 
   const username =
     getUsername(link);
 
   if(!username){
 
-    name.textContent =
-      "Invalid profile";
-
-    count.textContent =
-      "—";
-
-    past.textContent =
-      "—";
-
-    status.textContent =
-      "Invalid link";
-
-    return;
+    return {
+      name:"Invalid profile",
+      past24Hours:0,
+      solved:0
+    };
 
   }
-
-  name.textContent =
-    "Loading...";
-
-  count.textContent =
-    "…";
-
-  past.textContent =
-    "…";
-
-  status.textContent =
-    "Checking";
-
-  profile.textContent =
-    `@${username}`;
-
 
   try{
 
     const response =
       await fetch(
-        `/api/profile?username=${
-          encodeURIComponent(
-            username
-          )
-        }`
+        `/api/profile?username=${encodeURIComponent(username)}`
       );
 
     const data =
@@ -590,47 +399,111 @@ async function checkProfile(
 
     }
 
-    name.textContent =
-      data.realName ||
-      `@${data.username}`;
+    return {
 
-    count.textContent =
-      Number(
-        data.solved?.total ?? 0
-      ).toLocaleString();
+      name:
+        data.realName ||
+        data.username,
 
-    past.textContent =
-      Number(
-        data.past24Hours ?? 0
-      ).toLocaleString();
+      past24Hours:
+        Number(
+          data.past24Hours ?? 0
+        ),
 
-    status.textContent =
-      "Updated";
+      solved:
+        Number(
+          data.solved?.total ?? 0
+        )
 
-    profile.textContent =
-      `@${data.username}`;
+    };
 
-  }
-  catch(error){
+  }catch(error){
 
-    name.textContent =
-      "Error";
+    return {
 
-    count.textContent =
-      "—";
+      name:username,
 
-    past.textContent =
-      "—";
+      past24Hours:0,
 
-    status.textContent =
-      "Try again";
+      solved:0
+
+    };
 
   }
 
 }
 
 
-/* CHECK ALL */
+/* =========================
+   SORT + CREATE ROWS
+========================= */
+
+function createRows(data){
+
+  members.innerHTML = "";
+
+  data.forEach(
+    (user,index) => {
+
+      const row =
+        document.createElement("div");
+
+      row.className =
+        "member";
+
+      row.innerHTML = `
+
+        <div class="num">
+          ${String(
+            index + 1
+          ).padStart(2,"0")}
+        </div>
+
+        <div class="name">
+          ${escapeHtml(user.name)}
+        </div>
+
+        <div class="past">
+          ${Number(
+            user.past24Hours
+          ).toLocaleString()}
+        </div>
+
+        <div class="count">
+          ${Number(
+            user.solved
+          ).toLocaleString()}
+        </div>
+
+      `;
+
+      members.appendChild(row);
+
+    }
+  );
+
+}
+
+
+/* =========================
+   HTML SAFETY
+========================= */
+
+function escapeHtml(value){
+
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================
+   CHECK ALL PROFILES
+========================= */
 
 checkAllButton.addEventListener(
   "click",
@@ -641,11 +514,11 @@ checkAllButton.addEventListener(
 
     const links =
       profileLinks.value
-      .split(/\r?\n/)
-      .map(
-        link => link.trim()
-      )
-      .filter(Boolean);
+        .split(/\r?\n/)
+        .map(
+          link => link.trim()
+        )
+        .filter(Boolean);
 
     if(
       links.length === 0
@@ -661,28 +534,56 @@ checkAllButton.addEventListener(
 
     }
 
-    createRows(
-      links.length
-    );
-
     checkAllButton.disabled =
       true;
 
     checkAllButton.textContent =
       `Checking ${links.length} Profiles...`;
 
+    try{
 
-    await Promise.all(
+      /*
+        Check every profile
+        at the same time.
+      */
 
-      links.map(
-        (link,index) =>
-          checkProfile(
-            index,
-            link
+      const results =
+        await Promise.all(
+          links.map(
+            link =>
+              checkProfile(link)
           )
-      )
+        );
 
-    );
+
+      /*
+        Alphabetical order:
+        A → B → C → D...
+      */
+
+      results.sort(
+        (a,b) =>
+          a.name.localeCompare(
+            b.name,
+            undefined,
+            {
+              sensitivity:"base"
+            }
+          )
+      );
+
+
+      createRows(results);
+
+    }catch(error){
+
+      errorBox.textContent =
+        "Something went wrong. Please try again.";
+
+      errorBox.style.display =
+        "block";
+
+    }
 
 
     checkAllButton.disabled =
