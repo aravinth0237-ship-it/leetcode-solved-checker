@@ -3,10 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+
 <title>LeetCode Progress</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
 
 body{
   margin:0;
@@ -16,7 +19,7 @@ body{
 }
 
 .wrap{
-  width:min(760px,100%);
+  width:min(650px,100%);
   margin:auto;
   padding:18px 10px;
 }
@@ -39,12 +42,12 @@ h1{
   border:1px solid #293646;
   border-radius:12px;
   padding:10px;
-  margin-bottom:10px;
+  margin-bottom:12px;
 }
 
 textarea{
   width:100%;
-  min-height:150px;
+  min-height:140px;
   resize:vertical;
   padding:11px;
   border-radius:9px;
@@ -94,6 +97,8 @@ button:disabled{
   font-size:12px;
 }
 
+/* TABLE */
+
 .board{
   background:#111821;
   border:1px solid #253140;
@@ -104,34 +109,34 @@ button:disabled{
 .header,
 .member{
   display:grid;
-  grid-template-columns:34px minmax(0,1fr) 130px 65px;
+  grid-template-columns:70px minmax(0,1fr) 90px;
   align-items:center;
-  gap:7px;
 }
 
 .header{
-  padding:8px 9px;
+  padding:10px 14px;
   background:#151e29;
   color:#8997aa;
-  font-size:10px;
+  font-size:11px;
+  font-weight:700;
   text-transform:uppercase;
-  letter-spacing:.4px;
+  letter-spacing:.5px;
 }
 
 .member{
-  min-height:44px;
-  padding:5px 9px;
+  min-height:43px;
+  padding:7px 14px;
   border-top:1px solid #202a36;
 }
 
 .num{
   color:#738198;
-  font-size:11px;
-  text-align:center;
+  font-size:12px;
 }
 
 .name{
-  font-size:12px;
+  font-size:13px;
+  font-weight:600;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
@@ -141,15 +146,6 @@ button:disabled{
   text-align:right;
   font-size:17px;
   font-weight:800;
-}
-
-.status{
-  color:#738198;
-  font-size:9px;
-  margin-top:1px;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
 }
 
 @media(max-width:600px){
@@ -172,8 +168,7 @@ button:disabled{
   }
 
   textarea{
-    min-height:120px;
-    padding:8px;
+    min-height:115px;
     font-size:10px;
   }
 
@@ -184,34 +179,29 @@ button:disabled{
 
   .header,
   .member{
-    grid-template-columns:25px minmax(0,1fr) 105px 52px;
-    gap:4px;
+    grid-template-columns:45px minmax(0,1fr) 65px;
   }
 
   .header{
-    padding:6px;
-    font-size:8px;
-  }
-
-  .member{
-    min-height:38px;
-    padding:4px 6px;
-  }
-
-  .num{
+    padding:7px 9px;
     font-size:9px;
   }
 
-  .name{
+  .member{
+    min-height:37px;
+    padding:5px 9px;
+  }
+
+  .num{
     font-size:10px;
+  }
+
+  .name{
+    font-size:11px;
   }
 
   .count{
     font-size:14px;
-  }
-
-  .status{
-    font-size:7px;
   }
 }
 </style>
@@ -224,24 +214,22 @@ button:disabled{
 <h1>🏆 LeetCode Progress</h1>
 
 <p class="sub">
-Paste all LeetCode profile links — one link per line
+Paste LeetCode profile links — one link per line
 </p>
 
 <div class="inputBox">
 
 <textarea
   id="profileLinks"
-  placeholder="Paste LeetCode profile links here...
+  placeholder="Paste profile links here...
 
-Example:
 https://leetcode.com/u/user1/
 https://leetcode.com/u/user2/
-https://leetcode.com/u/user3/
-https://leetcode.com/u/user4/"
+https://leetcode.com/u/user3/"
 ></textarea>
 
 <button id="checkAll">
-Check Profiles
+  Check Profiles
 </button>
 
 </div>
@@ -250,18 +238,18 @@ Check Profiles
 
 <section class="board">
 
-<div class="header">
-  <div>#</div>
-  <div>Member</div>
-  <div>Status</div>
-  <div>Solved</div>
-</div>
+  <div class="header">
+    <div>NO.</div>
+    <div>NAME</div>
+    <div>SOLVED</div>
+  </div>
 
-<div id="members"></div>
+  <div id="members"></div>
 
 </section>
 
 </main>
+
 
 <script>
 
@@ -278,63 +266,7 @@ const errorBox =
   document.getElementById("error");
 
 
-/* CREATE ROWS */
-
-function createRows(total){
-
-  members.innerHTML = "";
-
-  for(let i = 0; i < total; i++){
-
-    const row =
-      document.createElement("div");
-
-    row.className = "member";
-
-    row.innerHTML = `
-
-      <div class="num">
-        ${String(i + 1).padStart(2,"0")}
-      </div>
-
-      <div>
-        <div
-          class="name"
-          id="name-${i}"
-        >
-          Loading...
-        </div>
-
-        <div
-          class="status"
-          id="status-${i}"
-        >
-          Waiting
-        </div>
-      </div>
-
-      <div
-        class="status"
-        id="profile-${i}"
-      >
-        —
-      </div>
-
-      <div
-        class="count"
-        id="count-${i}"
-      >
-        —
-      </div>
-
-    `;
-
-    members.appendChild(row);
-  }
-}
-
-
-/* GET USERNAME */
+/* GET USERNAME FROM PROFILE LINK */
 
 function getUsername(value){
 
@@ -373,7 +305,9 @@ function getUsername(value){
     }
 
   }catch(error){
+
     return "";
+
   }
 
   return value
@@ -382,38 +316,89 @@ function getUsername(value){
 }
 
 
+/*
+  Remove symbols / numbers from the
+  beginning for alphabetical sorting.
+
+  Example:
+
+  @Arun   -> Arun
+  #Bala   -> Bala
+  ★Chitra -> Chitra
+  123David -> David
+*/
+
+function sortName(name){
+
+  return String(name || "")
+    .normalize("NFKD")
+    .replace(/^[^A-Za-z]+/, "")
+    .trim()
+    .toLowerCase();
+}
+
+
+/* CREATE RESULT ROW */
+
+function createRow(index, data){
+
+  const row =
+    document.createElement("div");
+
+  row.className = "member";
+
+  row.innerHTML = `
+
+    <div class="num">
+      ${String(index + 1).padStart(2,"0")}
+    </div>
+
+    <div class="name">
+      ${escapeHTML(
+        data.name || "Unknown"
+      )}
+    </div>
+
+    <div class="count">
+      ${Number(
+        data.solved || 0
+      ).toLocaleString()}
+    </div>
+
+  `;
+
+  members.appendChild(row);
+}
+
+
+/* SAFE TEXT */
+
+function escapeHTML(value){
+
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+
 /* CHECK ONE PROFILE */
 
-async function checkProfile(index, link){
-
-  const name =
-    document.getElementById(`name-${index}`);
-
-  const count =
-    document.getElementById(`count-${index}`);
-
-  const status =
-    document.getElementById(`status-${index}`);
-
-  const profile =
-    document.getElementById(`profile-${index}`);
+async function getProfile(link){
 
   const username =
     getUsername(link);
 
   if(!username){
 
-    name.textContent = "Invalid profile";
-    count.textContent = "—";
-    status.textContent = "Invalid link";
+    return {
+      name:"Invalid profile",
+      solved:0
+    };
 
-    return;
   }
-
-  name.textContent = "Loading...";
-  count.textContent = "…";
-  status.textContent = "Checking";
-  profile.textContent = `@${username}`;
 
   try{
 
@@ -428,36 +413,51 @@ async function checkProfile(index, link){
     if(!response.ok){
 
       throw new Error(
-        data.error || "Unable to load profile"
+        data.error ||
+        "Unable to load profile"
       );
+
     }
 
-    name.textContent =
-      data.realName ||
-      `@${data.username}`;
+    return {
 
-    count.textContent =
-      Number(
-        data.solved?.total ?? 0
-      ).toLocaleString();
+      name:
+        data.realName ||
+        data.username ||
+        username,
 
-    status.textContent =
-      "Updated";
+      solved:
+        Number(
+          data.solved?.total ?? 0
+        )
 
-    profile.textContent =
-      `@${data.username}`;
+    };
 
   }catch(error){
 
-    name.textContent = "Error";
-    count.textContent = "—";
-    status.textContent = "Try again";
+    return {
+
+      name:
+        dataSafeName(username),
+
+      solved:0
+
+    };
 
   }
 }
 
 
-/* CHECK ALL LINKS */
+/* FALLBACK NAME */
+
+function dataSafeName(username){
+
+  return username || "Unknown";
+
+}
+
+
+/* CHECK ALL */
 
 checkAllButton.addEventListener(
   "click",
@@ -471,6 +471,7 @@ checkAllButton.addEventListener(
       .map(link => link.trim())
       .filter(Boolean);
 
+
     if(links.length === 0){
 
       errorBox.textContent =
@@ -481,23 +482,68 @@ checkAllButton.addEventListener(
       return;
     }
 
-    createRows(links.length);
+
+    members.innerHTML = "";
 
     checkAllButton.disabled = true;
 
     checkAllButton.textContent =
       `Checking ${links.length} Profiles...`;
 
+
     /*
-      Check every profile
+      Get all profiles
     */
 
-    await Promise.all(
-      links.map(
-        (link,index) =>
-          checkProfile(index,link)
-      )
+    const results =
+      await Promise.all(
+        links.map(link =>
+          getProfile(link)
+        )
+      );
+
+
+    /*
+      SORT A → Z
+
+      Symbols at the beginning
+      are ignored while sorting.
+    */
+
+    results.sort((a,b) => {
+
+      const nameA =
+        sortName(a.name);
+
+      const nameB =
+        sortName(b.name);
+
+      return nameA.localeCompare(
+        nameB,
+        undefined,
+        {
+          sensitivity:"base"
+        }
+      );
+
+    });
+
+
+    /*
+      DISPLAY SORTED RESULTS
+    */
+
+    results.forEach(
+      (data,index) => {
+
+        createRow(
+          index,
+          data
+        );
+
+      }
     );
+
 
     checkAllButton.disabled = false;
 
