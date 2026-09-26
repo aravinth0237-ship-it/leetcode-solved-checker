@@ -1,39 +1,22 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-
 <meta charset="utf-8">
-
-<meta
-  name="viewport"
-  content="width=device-width,initial-scale=1"
->
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>LeetCode Progress</title>
 
 <style>
-
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
   margin:0;
-  font-family:
-    Inter,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
-
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   background:#0b0f14;
   color:#f4f7fb;
 }
 
 .wrap{
-  width:min(820px,100%);
+  width:min(760px,100%);
   margin:auto;
   padding:18px 10px;
 }
@@ -42,7 +25,6 @@ h1{
   text-align:center;
   font-size:26px;
   margin:4px 0;
-  font-weight:800;
 }
 
 .sub{
@@ -51,11 +33,6 @@ h1{
   font-size:12px;
   margin:0 0 16px;
 }
-
-
-/* =========================
-   INPUT
-========================= */
 
 .inputBox{
   background:#111821;
@@ -69,20 +46,14 @@ textarea{
   width:100%;
   min-height:150px;
   resize:vertical;
-
   padding:11px;
-
   border-radius:9px;
   border:1px solid #303d4d;
-
   background:#0c1219;
   color:#fff;
-
   outline:none;
-
   font-size:12px;
   line-height:1.6;
-
   font-family:monospace;
 }
 
@@ -97,18 +68,13 @@ textarea::placeholder{
 button{
   width:100%;
   height:42px;
-
   margin-top:8px;
-
   border:0;
   border-radius:9px;
-
   background:#fff;
   color:#111;
-
   font-weight:800;
   font-size:13px;
-
   cursor:pointer;
 }
 
@@ -119,214 +85,72 @@ button:disabled{
 
 .error{
   display:none;
-
   background:#2a171b;
   border:1px solid #5c292e;
-
   color:#ffb7bd;
-
   padding:9px;
-
   border-radius:9px;
-
   margin-bottom:10px;
-
   font-size:12px;
 }
 
-
-/* =========================
-   ONE SINGLE TABLE BOX
-========================= */
-
 .board{
-  width:100%;
-
   background:#111821;
-
-  border:1px solid #344154;
-
-  border-radius:18px;
-
+  border:1px solid #253140;
+  border-radius:12px;
   overflow:hidden;
 }
-
-
-/* =========================
-   SAME COLUMNS
-========================= */
 
 .header,
 .member{
   display:grid;
-
-  grid-template-columns:
-    55px
-    minmax(0,1fr)
-    120px
-    100px;
-
+  grid-template-columns:34px minmax(0,1fr) 130px 65px;
   align-items:center;
-
-  column-gap:0;
+  gap:7px;
 }
-
-
-/* =========================
-   HEADER
-========================= */
 
 .header{
-  min-height:56px;
-
-  padding:0 18px;
-
+  padding:8px 9px;
   background:#151e29;
-
-  border-bottom:1px solid #293646;
-
-  color:#aebbd0;
-
-  font-size:13px;
-
-  font-weight:700;
-
+  color:#8997aa;
+  font-size:10px;
   text-transform:uppercase;
-
-  letter-spacing:.3px;
+  letter-spacing:.4px;
 }
-
-
-/*
-  IMPORTANT:
-  Header cells are NOT separate boxes.
-*/
-
-.header > div{
-  height:auto;
-
-  border:0;
-
-  background:transparent;
-
-  padding:0;
-}
-
-
-/* # */
-
-.header > div:nth-child(1){
-  text-align:center;
-}
-
-
-/* NAME */
-
-.header > div:nth-child(2){
-  text-align:left;
-}
-
-
-/* PAST 24H */
-
-.header > div:nth-child(3){
-  text-align:right;
-}
-
-
-/* SOLVED */
-
-.header > div:nth-child(4){
-  text-align:right;
-}
-
-
-/* =========================
-   MEMBER ROW
-========================= */
 
 .member{
-  min-height:62px;
-
-  padding:0 18px;
-
-  border-bottom:1px solid #253140;
+  min-height:44px;
+  padding:5px 9px;
+  border-top:1px solid #202a36;
 }
-
-.member:last-child{
-  border-bottom:none;
-}
-
-
-/* =========================
-   NUMBER
-========================= */
 
 .num{
+  color:#738198;
+  font-size:11px;
   text-align:center;
-
-  font-size:14px;
-
-  font-weight:600;
-
-  color:#8190a5;
 }
 
-
-/* =========================
-   NAME
-========================= */
-
 .name{
-  text-align:left;
-
-  font-size:16px;
-
-  font-weight:600;
-
-  color:#f4f7fb;
-
+  font-size:12px;
   white-space:nowrap;
-
   overflow:hidden;
-
   text-overflow:ellipsis;
 }
 
-
-/* =========================
-   PAST 24H
-========================= */
-
-.past{
-  text-align:right;
-
-  font-size:18px;
-
-  font-weight:700;
-
-  color:#f4f7fb;
-}
-
-
-/* =========================
-   SOLVED
-========================= */
-
 .count{
   text-align:right;
-
-  font-size:18px;
-
-  font-weight:700;
-
-  color:#f4f7fb;
+  font-size:17px;
+  font-weight:800;
 }
 
-
-/* =========================
-   MOBILE
-========================= */
+.status{
+  color:#738198;
+  font-size:9px;
+  margin-top:1px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
 
 @media(max-width:600px){
 
@@ -358,254 +182,238 @@ button:disabled{
     font-size:12px;
   }
 
-
-  /* SAME MOBILE COLUMNS */
-
   .header,
   .member{
-
-    grid-template-columns:
-      35px
-      minmax(0,1fr)
-      75px
-      65px;
-
-    column-gap:0;
+    grid-template-columns:25px minmax(0,1fr) 105px 52px;
+    gap:4px;
   }
 
-
   .header{
-    min-height:48px;
+    padding:6px;
+    font-size:8px;
+  }
 
-    padding:0 8px;
+  .member{
+    min-height:38px;
+    padding:4px 6px;
+  }
 
+  .num{
     font-size:9px;
   }
 
-
-  .member{
-    min-height:52px;
-
-    padding:0 8px;
-  }
-
-
-  .num{
+  .name{
     font-size:10px;
   }
 
-
-  .name{
-    font-size:13px;
-  }
-
-
-  .past,
   .count{
     font-size:14px;
   }
 
+  .status{
+    font-size:7px;
+  }
 }
-
 </style>
-
 </head>
-
 
 <body>
 
 <main class="wrap">
 
+<h1>🏆 LeetCode Progress</h1>
 
-  <h1>
-    🏆 LeetCode Progress
-  </h1>
+<p class="sub">
+Paste all LeetCode profile links — one link per line
+</p>
 
+<div class="inputBox">
 
-  <p class="sub">
-    Paste all LeetCode profile links — one link per line
-  </p>
-
-
-  <div class="inputBox">
-
-    <textarea
-      id="profileLinks"
-      placeholder="Paste LeetCode profile links here...
+<textarea
+  id="profileLinks"
+  placeholder="Paste LeetCode profile links here...
 
 Example:
 https://leetcode.com/u/user1/
 https://leetcode.com/u/user2/
 https://leetcode.com/u/user3/
 https://leetcode.com/u/user4/"
-    ></textarea>
+></textarea>
 
+<button id="checkAll">
+Check Profiles
+</button>
 
-    <button id="checkAll">
-      Check Profiles
-    </button>
+</div>
 
-  </div>
+<div class="error" id="error"></div>
 
+<section class="board">
 
-  <div
-    class="error"
-    id="error"
-  ></div>
+<div class="header">
+  <div>#</div>
+  <div>Member</div>
+  <div>Status</div>
+  <div>Solved</div>
+</div>
 
+<div id="members"></div>
 
-  <!-- SINGLE BOX -->
-
-  <section class="board">
-
-
-    <!-- HEADER -->
-
-    <div class="header">
-
-      <div>#</div>
-
-      <div>NAME</div>
-
-      <div>PAST 24H</div>
-
-      <div>SOLVED</div>
-
-    </div>
-
-
-    <!-- MEMBERS -->
-
-    <div id="members"></div>
-
-
-  </section>
-
+</section>
 
 </main>
 
-
 <script>
 
-
 const profileLinks =
-  document.getElementById(
-    "profileLinks"
-  );
-
+  document.getElementById("profileLinks");
 
 const checkAllButton =
-  document.getElementById(
-    "checkAll"
-  );
-
+  document.getElementById("checkAll");
 
 const members =
-  document.getElementById(
-    "members"
-  );
-
+  document.getElementById("members");
 
 const errorBox =
-  document.getElementById(
-    "error"
-  );
+  document.getElementById("error");
 
 
-/* =========================
-   GET USERNAME
-========================= */
+/* CREATE ROWS */
+
+function createRows(total){
+
+  members.innerHTML = "";
+
+  for(let i = 0; i < total; i++){
+
+    const row =
+      document.createElement("div");
+
+    row.className = "member";
+
+    row.innerHTML = `
+
+      <div class="num">
+        ${String(i + 1).padStart(2,"0")}
+      </div>
+
+      <div>
+        <div
+          class="name"
+          id="name-${i}"
+        >
+          Loading...
+        </div>
+
+        <div
+          class="status"
+          id="status-${i}"
+        >
+          Waiting
+        </div>
+      </div>
+
+      <div
+        class="status"
+        id="profile-${i}"
+      >
+        —
+      </div>
+
+      <div
+        class="count"
+        id="count-${i}"
+      >
+        —
+      </div>
+
+    `;
+
+    members.appendChild(row);
+  }
+}
+
+
+/* GET USERNAME */
 
 function getUsername(value){
 
-  value =
-    value.trim();
+  value = value.trim();
 
-  if(!value){
-    return "";
-  }
-
+  if(!value) return "";
 
   try{
 
-    if(
-      value.includes(
-        "leetcode.com"
-      )
-    ){
+    if(value.includes("leetcode.com")){
 
-      const url =
-        new URL(
-          value.startsWith("http")
-            ? value
-            : "https://" + value
-        );
-
+      const url = new URL(
+        value.startsWith("http")
+          ? value
+          : "https://" + value
+      );
 
       const parts =
         url.pathname
-          .split("/")
-          .filter(Boolean);
-
+        .split("/")
+        .filter(Boolean);
 
       const uIndex =
         parts.indexOf("u");
-
 
       if(
         uIndex !== -1 &&
         parts[uIndex + 1]
       ){
-
         return decodeURIComponent(
           parts[uIndex + 1]
         );
-
       }
 
-
       return parts[0] || "";
-
     }
 
   }catch(error){
-
     return "";
-
   }
-
 
   return value
     .replace(/^@/,"")
     .replace(/\s/g,"");
-
 }
 
 
-/* =========================
-   CHECK ONE PROFILE
-========================= */
+/* CHECK ONE PROFILE */
 
-async function checkProfile(link){
+async function checkProfile(index, link){
+
+  const name =
+    document.getElementById(`name-${index}`);
+
+  const count =
+    document.getElementById(`count-${index}`);
+
+  const status =
+    document.getElementById(`status-${index}`);
+
+  const profile =
+    document.getElementById(`profile-${index}`);
 
   const username =
     getUsername(link);
 
-
   if(!username){
 
-    return {
+    name.textContent = "Invalid profile";
+    count.textContent = "—";
+    status.textContent = "Invalid link";
 
-      name:"Invalid profile",
-
-      past24Hours:0,
-
-      solved:0
-
-    };
-
+    return;
   }
 
+  name.textContent = "Loading...";
+  count.textContent = "…";
+  status.textContent = "Checking";
+  profile.textContent = `@${username}`;
 
   try{
 
@@ -614,284 +422,87 @@ async function checkProfile(link){
         `/api/profile?username=${encodeURIComponent(username)}`
       );
 
-
     const data =
       await response.json();
-
 
     if(!response.ok){
 
       throw new Error(
-        data.error ||
-        "Unable to load profile"
+        data.error || "Unable to load profile"
       );
-
     }
 
+    name.textContent =
+      data.realName ||
+      `@${data.username}`;
 
-    return {
+    count.textContent =
+      Number(
+        data.solved?.total ?? 0
+      ).toLocaleString();
 
-      name:
-        data.realName ||
-        data.username,
+    status.textContent =
+      "Updated";
 
-      past24Hours:
-        Number(
-          data.past24Hours ?? 0
-        ),
-
-      solved:
-        Number(
-          data.solved?.total ?? 0
-        )
-
-    };
-
+    profile.textContent =
+      `@${data.username}`;
 
   }catch(error){
 
-    return {
-
-      name:username,
-
-      past24Hours:0,
-
-      solved:0
-
-    };
+    name.textContent = "Error";
+    count.textContent = "—";
+    status.textContent = "Try again";
 
   }
-
 }
 
 
-/* =========================
-   SORT NAME
-   IGNORE SPECIAL CHARACTERS
-========================= */
-
-function sortName(name){
-
-  return String(name)
-
-    .toLowerCase()
-
-    .replace(
-      /[^a-z0-9]/g,
-      ""
-    );
-
-}
-
-
-/* =========================
-   CREATE ROWS
-========================= */
-
-function createRows(data){
-
-  members.innerHTML = "";
-
-
-  data.forEach(
-    (user,index) => {
-
-      const row =
-        document.createElement(
-          "div"
-        );
-
-
-      row.className =
-        "member";
-
-
-      row.innerHTML = `
-
-        <div class="num">
-          ${String(
-            index + 1
-          ).padStart(2,"0")}
-        </div>
-
-
-        <div class="name">
-          ${escapeHtml(
-            user.name
-          )}
-        </div>
-
-
-        <div class="past">
-          ${Number(
-            user.past24Hours
-          ).toLocaleString()}
-        </div>
-
-
-        <div class="count">
-          ${Number(
-            user.solved
-          ).toLocaleString()}
-        </div>
-
-      `;
-
-
-      members.appendChild(
-        row
-      );
-
-    }
-  );
-
-}
-
-
-/* =========================
-   HTML SAFETY
-========================= */
-
-function escapeHtml(value){
-
-  return String(value)
-
-    .replace(
-      /&/g,
-      "&amp;"
-    )
-
-    .replace(
-      /</g,
-      "&lt;"
-    )
-
-    .replace(
-      />/g,
-      "&gt;"
-    )
-
-    .replace(
-      /"/g,
-      "&quot;"
-    )
-
-    .replace(
-      /'/g,
-      "&#039;"
-    );
-
-}
-
-
-/* =========================
-   CHECK ALL
-========================= */
+/* CHECK ALL LINKS */
 
 checkAllButton.addEventListener(
   "click",
   async () => {
 
-
-    errorBox.style.display =
-      "none";
-
+    errorBox.style.display = "none";
 
     const links =
       profileLinks.value
+      .split(/\r?\n/)
+      .map(link => link.trim())
+      .filter(Boolean);
 
-        .split(/\r?\n/)
-
-        .map(
-          link =>
-            link.trim()
-        )
-
-        .filter(Boolean);
-
-
-    if(
-      links.length === 0
-    ){
+    if(links.length === 0){
 
       errorBox.textContent =
         "Please paste at least one LeetCode profile link.";
 
-      errorBox.style.display =
-        "block";
+      errorBox.style.display = "block";
 
       return;
-
     }
 
+    createRows(links.length);
 
-    checkAllButton.disabled =
-      true;
-
+    checkAllButton.disabled = true;
 
     checkAllButton.textContent =
       `Checking ${links.length} Profiles...`;
 
+    /*
+      Check every profile
+    */
 
-    try{
+    await Promise.all(
+      links.map(
+        (link,index) =>
+          checkProfile(index,link)
+      )
+    );
 
-
-      const results =
-        await Promise.all(
-
-          links.map(
-            link =>
-              checkProfile(
-                link
-              )
-          )
-
-        );
-
-
-      /*
-        Alphabetical order.
-        Special characters are ignored.
-      */
-
-      results.sort(
-        (a,b) => {
-
-          return sortName(
-            a.name
-          ).localeCompare(
-            sortName(
-              b.name
-            )
-          );
-
-        }
-      );
-
-
-      createRows(
-        results
-      );
-
-
-    }catch(error){
-
-      errorBox.textContent =
-        "Something went wrong. Please try again.";
-
-      errorBox.style.display =
-        "block";
-
-    }
-
-
-    checkAllButton.disabled =
-      false;
-
+    checkAllButton.disabled = false;
 
     checkAllButton.textContent =
       "Check Profiles";
-
 
   }
 );
@@ -899,5 +510,4 @@ checkAllButton.addEventListener(
 </script>
 
 </body>
-
 </html>
